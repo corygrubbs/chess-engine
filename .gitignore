@@ -1,0 +1,18 @@
+# Generated build artifacts
+/target/
+/**/target/
+
+# Cargo metadata
+Cargo.lock
+
+# Rust Analyzer cache
+.rust-analyzer/
+
+# IDE / editor files
+.idea/
+*.sublime-workspace
+.vscode/
+
+# Mac / Windows files
+.DS_Store
+Thumbs.db
