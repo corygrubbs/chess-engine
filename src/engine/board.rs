@@ -2,25 +2,27 @@ use std::ops::BitOr;
 use bitvec::array::BitArray;
 use bitvec::order::Lsb0;
 
-type BoardBitset = BitArray<u64, Lsb0>;
+pub type BoardBitset = BitArray<u64, Lsb0>;
 pub struct Board {
-    white_pawns: BoardBitset,
-    white_knights: BoardBitset,
-    white_bishops: BoardBitset,
-    white_rooks: BoardBitset,
-    white_queens: BoardBitset,
-    white_king: BoardBitset,
+    pub(crate) white_pawns: BoardBitset,
+    pub(crate) white_knights: BoardBitset,
+    pub(crate) white_bishops: BoardBitset,
+    pub(crate) white_rooks: BoardBitset,
+    pub(crate) white_queens: BoardBitset,
+    pub(crate) white_king: BoardBitset,
 
-    black_pawns: BoardBitset,
-    black_knights: BoardBitset,
-    black_bishops: BoardBitset,
-    black_rooks: BoardBitset,
-    black_queens: BoardBitset,
-    black_king: BoardBitset,
+    pub(crate) black_pawns: BoardBitset,
+    pub(crate) black_knights: BoardBitset,
+    pub(crate) black_bishops: BoardBitset,
+    pub(crate) black_rooks: BoardBitset,
+    pub(crate) black_queens: BoardBitset,
+    pub(crate) black_king: BoardBitset,
 
-    white_board: BoardBitset,
-    black_board: BoardBitset,
-    complete_board: BoardBitset
+    pub(crate) white_board: BoardBitset,
+    pub(crate) black_board: BoardBitset,
+    
+    pub(crate) complete_board: BoardBitset,
+    pub(crate) empty_board: BoardBitset
 }
 
 impl Default for Board {
@@ -41,10 +43,10 @@ impl Default for Board {
 
         let starting_white_board = starting_white_pawns | starting_white_knights | starting_white_bishops | starting_white_rooks | starting_white_queens | starting_white_king;
         let starting_black_board = starting_black_pawns | starting_black_knights | starting_black_bishops | starting_black_rooks | starting_black_queens | starting_black_king;
+        
         let starting_complete_board = starting_white_board | starting_black_board;
-
-
-        let complete_board = starting_white_pawns | starting_black_pawns;
+        let starting_empty_board = !starting_complete_board;
+        
         Self {
             white_pawns: starting_white_pawns,
             white_knights: starting_white_knights,
@@ -62,7 +64,9 @@ impl Default for Board {
 
             white_board: starting_white_board,
             black_board: starting_black_board,
-            complete_board: starting_complete_board
+            
+            complete_board: starting_complete_board,
+            empty_board: starting_empty_board
         }
     }
 }
